@@ -18,7 +18,7 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import place from "./../assets/place.png";
 import axios from "axios";
 
-const API_URL = process.env.API_URL;
+const API_URL = import.meta.env.API_URL;
 
 export const AddMyTravel = () => {
 

@@ -10,7 +10,7 @@ import { Link, useNavigate } from "react-router-dom";
 import travel from "./../assets/travel.png";
 import axios from "axios";
 
-const API_URL = process.env.API_URL;
+const API_URL = import.meta.env.API_URL;
 
 export const Login = () => {
   const navigator = useNavigate();

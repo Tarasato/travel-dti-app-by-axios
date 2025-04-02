@@ -21,7 +21,7 @@ import Place from "./../assets/place.png";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-const API_URL = process.env.API_URL;
+const API_URL = import.meta.env.API_URL;
 
 export const MyTravel = () => {
   const [travellerFullname, setTravellerFullname] = useState("");

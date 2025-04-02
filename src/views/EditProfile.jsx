@@ -19,7 +19,7 @@ import { styled } from "@mui/material/styles";
 
 import Travel from "./../assets/travel.png";
 
-const API_URL = process.env.API_URL;
+const API_URL = import.meta.env.API_URL;
 
 export const EditProfile = () => {
   
