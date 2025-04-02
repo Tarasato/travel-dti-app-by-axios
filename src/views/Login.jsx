@@ -10,7 +10,7 @@ import { Link, useNavigate } from "react-router-dom";
 import travel from "./../assets/travel.png";
 import axios from "axios";
 
-const API_URL = import.meta.env.API_URL;
+const API_URL = import.meta.env.VITE_API_URL;
 
 export const Login = () => {
   const navigator = useNavigate()
@@ -46,8 +46,11 @@ export const Login = () => {
 
         // const data = await response.json()
         // localStorage.setItem('traveller', JSON.stringify(data["data"]))
+        
 
         localStorage.setItem('traveller', JSON.stringify(response.data["data"]))
+
+       
         
         //แล้วค่อยเปิดไปหน้า /mytravel
         navigator('/mytravel')

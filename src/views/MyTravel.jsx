@@ -21,7 +21,7 @@ import Place from "./../assets/place.png";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-const API_URL = import.meta.env.API_URL;
+const API_URL = import.meta.env.VITE_API_URL;
 
 export const MyTravel = () => {
   const [travellerFullname, setTravellerFullname] = useState("");
@@ -29,14 +29,18 @@ export const MyTravel = () => {
   const [travellerImage, setTravellerImage] = useState("");
   const [travel, setTravel] = useState([]);
 
-  useEffect(() => {
+  useEffect(() => {    
+
     //เอาข้อมูลใน Memory มาแสดงที่ Appbar
     //อ่านข้อมูล Traveller จาก Memory
-    const traveller = localStorage.getItem('traveller')
+    const traveller = JSON.parse(localStorage.getItem('traveller'))
+    
     //เอาข้อมูลในตัวแปรกำหนดให้กับ state ที่สร้างไว้
     setTravellerFullname(traveller.travellerFullname);
     setTravellerEmail(traveller.travellerEmail);
     setTravellerImage(traveller.travellerImage);
+
+
 
     //ดึงข้อมูลจาก DB ของ Traveller ที่ Login เข้ามา เพื่อแสดง
     const getAllTravel = async () => {
@@ -49,12 +53,16 @@ export const MyTravel = () => {
       //     },
       //   }
       // );
+
       
-      const resData = await axios.get(API_URL+`/travel/${traveller.travellerId}`);
+      // const resData = await axios.get(API_URL+`/travel/${traveller.travellerId}`);
+      const resData = await axios.get(`${API_URL}/travel/${traveller.travellerId}`);
 
       if (resData.status == 200) {
+        
         // const data = await resData.json();
         // setTravel(data["data"]);
+
         setTravel(resData.data["data"]);
       }
     };
@@ -103,7 +111,7 @@ export const MyTravel = () => {
             <Avatar
               src={
                 travellerImage
-                  ? API_URL+`/images/traveller/${travellerImage}`
+                  ? `${travellerImage}`
                   : Profile
               }
             />
@@ -147,6 +155,13 @@ export const MyTravel = () => {
               </TableRow>
             </TableHead>
             <TableBody>
+              {travel.length == 0 && (
+                <TableRow>
+                  <TableCell colSpan={7} align="center">
+                    ไม่มีข้อมูลการเดินทาง
+                  </TableCell>
+                </TableRow>
+              )}
               {travel.map((row, index) => (
                 <TableRow
                   key={index}
@@ -162,7 +177,7 @@ export const MyTravel = () => {
                       src={
                         row.travelImage == "" || null
                           ? Place
-                          : API_URL+`/images/travel/${row.travelImage}`
+                          : `${row.travelImage}`
                       }
                       sx={{ width: 60, height: 60, boxShadow: 3 }}
                       variant="rounded"

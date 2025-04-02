@@ -19,7 +19,7 @@ import { styled } from "@mui/material/styles";
 
 import Travel from "./../assets/travel.png";
 
-const API_URL = import.meta.env.API_URL;
+const API_URL = import.meta.env.VITE_API_URL;
 
 export const EditProfile = () => {
   
@@ -88,7 +88,7 @@ export const EditProfile = () => {
         //   method: "PUT",
         //   body: formData,
         // });
-        const response = await axios.put(API_URL+`/traveller/${travellerId}`, formData, {
+        const response = await axios.put(`${API_URL}/traveller/${travellerId}`, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -138,7 +138,7 @@ export const EditProfile = () => {
                 src={
                   travellerImage == ""
                     ? Profile
-                    : API_URL+`/images/traveller/${travellerImage}`
+                    : `${travellerImage}`
                 }
               />
               <Link
@@ -210,7 +210,7 @@ export const EditProfile = () => {
           <Avatar
             src={
               travellerNewImage == null
-                ? API_URL+`/images/traveller/${travellerImage}`
+                ? `${travellerImage}`
                 : travellerNewImage != null ? URL.createObjectURL(travellerNewImage) : Profile
             }
             alt="travel logo"
