@@ -18,6 +18,8 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import place from "./../assets/place.png";
 import axios from "axios";
 
+const API_URL = process.env.API_URL;
+
 export const AddMyTravel = () => {
 
   const navigator = useNavigate();
@@ -53,7 +55,7 @@ export const AddMyTravel = () => {
         //   method: "POST",
         //   body: formData,
         // });
-        const response = await axios.post("http://localhost:4000/travel", formData);
+        const response = await axios.post(API_URL+"/travel", formData);
         if (response.status == 201) {
           alert("เพิ่มการเดินทางสําเร็จ");
           navigator("/mytravel");
@@ -129,7 +131,7 @@ export const AddMyTravel = () => {
             <Avatar
               src={
                 travellerImage
-                  ? `http://localhost:4000/images/traveller/${travellerImage}`
+                  ? API_URL+`/images/traveller/${travellerImage}`
                   : Profile
               }
             />

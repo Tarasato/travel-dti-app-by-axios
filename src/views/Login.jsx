@@ -10,6 +10,8 @@ import { Link, useNavigate } from "react-router-dom";
 import travel from "./../assets/travel.png";
 import axios from "axios";
 
+const API_URL = process.env.API_URL;
+
 export const Login = () => {
   const navigator = useNavigate();
 
@@ -34,7 +36,7 @@ export const Login = () => {
       //   method: 'GET',
       // })
       
-      const response = await axios.get(`http://localhost:4000/traveller/${travellerEmail}/${travellerPassword}`)
+      const response = await axios.get(API_URL+`/traveller/${travellerEmail}/${travellerPassword}`)
 
       if(response.status == 200){
         //เอาข้อมูลของ Teaveller ไปเก็บไว้ใน memory

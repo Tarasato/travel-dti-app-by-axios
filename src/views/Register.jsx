@@ -13,6 +13,8 @@ import travel from "./../assets/travel.png";
 import profile from "./../assets/profile.png";
 import axios from "axios";
 
+const API_URL = process.env.API_URL;
+
 export const Register = () => {
 
   const [travellerImage, setTravellerImage] = useState(null)
@@ -67,7 +69,7 @@ export const Register = () => {
         //   method: 'POST',
         //   body: formData
         // })
-        const response = await axios.post('http://localhost:4000/traveller/', formData, {
+        const response = await axios.post(API_URL+'/traveller/', formData, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }

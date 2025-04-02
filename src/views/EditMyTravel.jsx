@@ -18,6 +18,8 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import place from "./../assets/place.png";
 import axios from "axios";
 
+const API_URL = process.env.API_URL;
+
 export const EditMyTravel = () => {
   const navigator = useNavigate();
 
@@ -49,7 +51,7 @@ export const EditMyTravel = () => {
 
       try {
         const response = await axios.put(
-          `http://localhost:4000/travel/${travelId}`,
+          API_URL+`http://localhost:4000/travel/${travelId}`,
           formData,
           {
             headers: {
@@ -123,7 +125,7 @@ export const EditMyTravel = () => {
       //   }
       // );
       const response = await axios.get(
-        `http://localhost:4000/travel/one/${travelId}`,
+        API_URL+`http://localhost:4000/travel/one/${travelId}`,
       );
       const data = await response.data;
       // setTravel(data["data"]);
@@ -159,7 +161,7 @@ export const EditMyTravel = () => {
             <Avatar
               src={
                 travellerImage
-                  ? `http://localhost:4000/images/traveller/${travellerImage}`
+                  ? API_URL+`/images/traveller/${travellerImage}`
                   : Profile
               }
             />
@@ -234,7 +236,7 @@ export const EditMyTravel = () => {
               travelNewImage == null
                 ? travelImage == ""
                   ? place
-                  : `http://localhost:4000/images/travel/${travelImage}`
+                  : API_URL+`/images/travel/${travelImage}`
                 : URL.createObjectURL(travelNewImage)
             }
             alt="travel logo"

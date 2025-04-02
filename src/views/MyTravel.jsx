@@ -21,6 +21,8 @@ import Place from "./../assets/place.png";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
+const API_URL = process.env.API_URL;
+
 export const MyTravel = () => {
   const [travellerFullname, setTravellerFullname] = useState("");
   const [travellerEmail, setTravellerEmail] = useState("");
@@ -48,7 +50,7 @@ export const MyTravel = () => {
       //   }
       // );
       
-      const resData = await axios.get(`http://localhost:4000/travel/${traveller.travellerId}`);
+      const resData = await axios.get(API_URL+`/travel/${traveller.travellerId}`);
 
       if (resData.status == 200) {
         // const data = await resData.json();
@@ -68,7 +70,7 @@ export const MyTravel = () => {
     //   },
     // });
     
-    const response = await axios.delete(`http://localhost:4000/travel/${travelId}`);
+    const response = await axios.delete(API_URL+`/travel/${travelId}`);
     
     if (response.status == 200) {
       alert("ลบข้อมูลสำเร็จ");
@@ -101,7 +103,7 @@ export const MyTravel = () => {
             <Avatar
               src={
                 travellerImage
-                  ? `http://localhost:4000/images/traveller/${travellerImage}`
+                  ? API_URL+`/images/traveller/${travellerImage}`
                   : Profile
               }
             />
@@ -160,7 +162,7 @@ export const MyTravel = () => {
                       src={
                         row.travelImage == "" || null
                           ? Place
-                          : `http://localhost:4000/images/travel/${row.travelImage}`
+                          : API_URL+`/images/travel/${row.travelImage}`
                       }
                       sx={{ width: 60, height: 60, boxShadow: 3 }}
                       variant="rounded"
